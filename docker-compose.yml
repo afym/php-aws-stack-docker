@@ -1,0 +1,29 @@
+version: "2"
+services:
+  application:
+    image: local-web-development-php7
+    build:
+      context: docker/
+    container_name: local_php_application
+    volumes:
+      - ./docker/nginx/sites.d:/etc/nginx/sites.d/
+      - ./src:/usr/share/nginx/html/
+      - ./volume/nginx/log:/var/log/nginx/
+    links:
+      - memcached
+      - postgresql
+    ports:
+      - 8090:80
+  memcached:
+    image: memcached:latest
+    container_name: local_memcached_server
+    ports:
+      - 8091:11211
+  postgresql:
+    image: postgres:latest
+    container_name: local_postgresql_server
+    environment:
+      POSTGRES_USER: postgres_user
+      POSTGRES_PASSWORD: postgres_password
+    ports:
+      - 8092:5432
