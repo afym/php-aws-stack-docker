@@ -2,9 +2,10 @@ FROM amazonlinux:latest
 
 MAINTAINER afym
 
-RUN yum install -y git curl \
+RUN yum install -y git curl telnet\
+    nginx php70-fpm.x86_64 \
+    ImageMagick.x86_64 \
     php70.x86_64 \
-    php70-fpm.x86_64 \
     php70-bcmath.x86_64 \
     php70-gd.x86_64 \
     php70-imap.x86_64 \
@@ -18,8 +19,8 @@ RUN yum install -y git curl \
     php70-soap.x86_64 \
     php70-tidy.x86_64 \
     php70-zip.x86_64 \
-    php70-pecl-memcached.x86_64\
-    ImageMagick.x86_64 \
+    php70-pecl-redis.x86_64 \
+    php70-pecl-memcache.x86_64 php70-pecl-memcached.x86_64 \
     nginx
 
 RUN mkdir /etc/nginx/sites.d/ -p
